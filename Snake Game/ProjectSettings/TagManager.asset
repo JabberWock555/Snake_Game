@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Wall
   - Body
+  - Apple
+  - Skull
   layers:
   - Default
   - TransparentFX

@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float TimetoMove = 0.2f;
+    public Food food;
     public GameObject Segment;
     [SerializeField]
     public List<GameObject> segments;
-    
+
     private bool IsMoving = false;
     private Vector3 orignalPos, TargetPos;
     private Vector3 direction = Vector2.up;
@@ -25,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        transform.position = new Vector3(0f,1f, 0f);
+        transform.position = new Vector3(0f, 1f, 0f);
         segments = new List<GameObject>();
         segments.Add(gameObject);
         segments.Add(Segment);
@@ -81,7 +82,7 @@ public class PlayerController : MonoBehaviour
         orignalPos = transform.position;
         TargetPos = orignalPos + Direction;
 
-        while(timePassed < TimetoMove)
+        while (timePassed < TimetoMove)
         {
             transform.position = Vector3.Lerp(orignalPos, TargetPos, (timePassed / TimetoMove));
             timePassed += Time.deltaTime;
@@ -91,10 +92,6 @@ public class PlayerController : MonoBehaviour
         IsMoving = false;
     }
 
-    public void FoodEaten()
-    {
-        Grow();
-    }
 
     private void Grow()
     {
@@ -116,6 +113,24 @@ public class PlayerController : MonoBehaviour
         if (collision.tag == "Body")
         {
             enabled = false;
+        }
+
+        if (collision.tag == "Apple")
+        {
+            ScoreManager.score += 10;
+            food.AppleEaten(segments.Count);
+            Grow();
+        }
+        else if (collision.tag == "Skull")
+        {
+            if (ScoreManager.score > 10)
+            {
+                ScoreManager.score -= 10;
+                food.SkullEaten();
+            }
+            Destroy(segments[segments.Count - 1]);
+            segments.RemoveAt(segments.Count - 1);
+            
         }
     }
 }
