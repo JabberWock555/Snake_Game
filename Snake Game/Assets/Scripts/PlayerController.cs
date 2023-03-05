@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour
     public GameObject Segment;
     [SerializeField]
     public List<GameObject> segments;
+    [HideInInspector]
+    public bool ShieldUp = false;
+    [HideInInspector]
+    public int foodPoints = 10;
 
     private bool IsMoving = false;
     private Vector3 orignalPos, TargetPos;
@@ -17,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 BodyOffset;
     private float horizontal;
     private float vertical;
-
+ 
     private void Awake()
     {
         transform.position = new Vector3(direction.x, direction.y, 0f);
@@ -97,9 +101,9 @@ public class PlayerController : MonoBehaviour
     {
         GameObject NewSegment = Instantiate(Segment);
         NewSegment.transform.SetParent(Segment.transform.parent, false);
-        //NewSegment.transform.position = segments[segments.Count - 1].transform.position + BodyOffset;
         segments.Add(NewSegment);
     }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -110,14 +114,15 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Body")
+        if (collision.tag == "Body" && !ShieldUp)
         {
             enabled = false;
         }
 
+        //--------Food
         if (collision.tag == "Apple")
         {
-            ScoreManager.score += 10;
+            ScoreManager.score += foodPoints;
             food.AppleEaten(segments.Count);
             Grow();
         }
@@ -125,7 +130,7 @@ public class PlayerController : MonoBehaviour
         {
             if (ScoreManager.score > 10)
             {
-                ScoreManager.score -= 10;
+                ScoreManager.score -= foodPoints;
                 food.SkullEaten();
             }
             Destroy(segments[segments.Count - 1]);
@@ -134,3 +139,5 @@ public class PlayerController : MonoBehaviour
         }
     }
 }
+
+public enum PowerUpType { Egg, Potion, Meat}
