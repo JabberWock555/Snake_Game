@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum PowerUpType { Egg, Potion, Meat }
+
 public class PowerUps : MonoBehaviour
 {
     public List<GameObject> Prefabs;
@@ -47,6 +49,8 @@ public class PowerUps : MonoBehaviour
     {
         if(collision.gameObject.GetComponent<PlayerController>() != null)
         {
+
+            SoundManager.Instance.Play(SoundEvents.EatPowerup);
             Eaten = true;
             switch (PowerItems[0].tag)
             {
@@ -72,7 +76,7 @@ public class PowerUps : MonoBehaviour
 
     private IEnumerator powerUps(int type)
     {
-        ScoreManager.Power = type;
+        GameUIManager.Power = type;
         switch (type)
         {
              
@@ -101,7 +105,7 @@ public class PowerUps : MonoBehaviour
             default:
                 break;
         }
-        ScoreManager.Power = 4;
+        GameUIManager.Power = 4;
         Eaten = false;
     }
 
