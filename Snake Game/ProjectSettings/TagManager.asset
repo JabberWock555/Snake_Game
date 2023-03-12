@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Wall
   - Body
+  - Apple
+  - Skull
+  - Egg
+  - Potion
+  - Meat
   layers:
   - Default
   - TransparentFX

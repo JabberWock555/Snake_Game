@@ -5,10 +5,15 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float TimetoMove = 0.2f;
+    public Food food;
     public GameObject Segment;
     [SerializeField]
     public List<GameObject> segments;
-    
+    [HideInInspector]
+    public bool ShieldUp = false;
+    [HideInInspector]
+    public int foodPoints = 10;
+
     private bool IsMoving = false;
     private Vector3 orignalPos, TargetPos;
     private Vector3 direction = Vector2.up;
@@ -16,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 BodyOffset;
     private float horizontal;
     private float vertical;
-
+ 
     private void Awake()
     {
         transform.position = new Vector3(direction.x, direction.y, 0f);
@@ -25,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        transform.position = new Vector3(0f,1f, 0f);
+        transform.position = new Vector3(0f, 1f, 0f);
         segments = new List<GameObject>();
         segments.Add(gameObject);
         segments.Add(Segment);
@@ -81,7 +86,7 @@ public class PlayerController : MonoBehaviour
         orignalPos = transform.position;
         TargetPos = orignalPos + Direction;
 
-        while(timePassed < TimetoMove)
+        while (timePassed < TimetoMove)
         {
             transform.position = Vector3.Lerp(orignalPos, TargetPos, (timePassed / TimetoMove));
             timePassed += Time.deltaTime;
@@ -91,18 +96,14 @@ public class PlayerController : MonoBehaviour
         IsMoving = false;
     }
 
-    public void FoodEaten()
-    {
-        Grow();
-    }
 
     private void Grow()
     {
         GameObject NewSegment = Instantiate(Segment);
         NewSegment.transform.SetParent(Segment.transform.parent, false);
-        //NewSegment.transform.position = segments[segments.Count - 1].transform.position + BodyOffset;
         segments.Add(NewSegment);
     }
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -113,9 +114,30 @@ public class PlayerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Body")
+        if (collision.tag == "Body" && !ShieldUp)
         {
             enabled = false;
         }
+
+        //--------Food
+        if (collision.tag == "Apple")
+        {
+            ScoreManager.score += foodPoints;
+            food.AppleEaten(segments.Count);
+            Grow();
+        }
+        else if (collision.tag == "Skull")
+        {
+            if (ScoreManager.score > 10)
+            {
+                ScoreManager.score -= foodPoints;
+                food.SkullEaten();
+            }
+            Destroy(segments[segments.Count - 1]);
+            segments.RemoveAt(segments.Count - 1);
+            
+        }
     }
 }
+
+public enum PowerUpType { Egg, Potion, Meat}
