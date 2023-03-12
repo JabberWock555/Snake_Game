@@ -36,3 +36,7 @@ If you have any suggestions or improvements for the Snake 2D Game, please feel f
 Credits
 
 The Snake 2D Game was created by AAYUSH GUPTA. Special thanks to OUTSCAL COMMUNITY.
+
+GamePlay:
+https://user-images.githubusercontent.com/97807224/224540632-a4c54015-db21-4347-85a7-524649825445.mov
+
