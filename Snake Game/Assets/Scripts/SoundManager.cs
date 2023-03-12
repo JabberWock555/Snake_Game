@@ -73,7 +73,7 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    private void AudioSetting(float volume, bool status)
+    public void AudioSetting(float volume, bool status)
     {
         if (status)
         {

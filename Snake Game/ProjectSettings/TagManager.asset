@@ -5,12 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
-  - Body
   - Apple
   - Skull
   - Egg
   - Potion
   - Meat
+  - Player1
+  - Player2
+  - Body1
+  - Body2
   layers:
   - Default
   - TransparentFX
