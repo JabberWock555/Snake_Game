@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,10 +6,10 @@ public enum PowerUpType { Egg, Potion, Meat }
 
 public class PowerUps : MonoBehaviour
 {
-    public List<GameObject> Prefabs;
-    public Food Spwan;
-    public PlayerController Player;
-    public List<GameObject> PowerItems;
+    [SerializeField] private List<GameObject> Prefabs;
+    [SerializeField] private Food Spwan;
+    [SerializeField] private PlayerController Player;
+    [SerializeField] private List<GameObject> PowerItems;
 
     private bool Spawned = false;
     private bool Eaten = false;
@@ -56,17 +55,14 @@ public class PowerUps : MonoBehaviour
             {
                 case "Egg":
                     StartCoroutine(powerUps((int)PowerUpType.Egg));
-                    Debug.Log("Picked up Egg: Shield on");
                     break;
 
                 case "Potion":
                     StartCoroutine(powerUps((int)PowerUpType.Potion));
-                    Debug.Log("Picked up Potion: Speed Boost");
                     break;
 
                 case "Meat":
                     StartCoroutine(powerUps((int)PowerUpType.Meat));
-                    Debug.Log("Picked up Meat: Score Boost");
                     break;
             }
             StartCoroutine(DestroyPower());

@@ -6,14 +6,13 @@ public class PlayerController : MonoBehaviour
 {
     public float TimetoMove = 0.2f;
     public Food food;
-    public GameObject Segment;
-    [SerializeField]
-    public List<GameObject> segments;
+    [SerializeField]private GameObject Segment;
+    [SerializeField]public List<GameObject> segments;
 
-    [HideInInspector]
-    public bool ShieldUp = false;
-    [HideInInspector]
-    public int foodPoints = 10;
+    [HideInInspector]public bool ShieldUp = false;
+    [HideInInspector]public int foodPoints = 10;
+    [HideInInspector]public float horizontal;
+    [HideInInspector]public float vertical;
     public static bool MultiPlayer;
 
     private bool IsMoving = false;
@@ -21,8 +20,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 direction = Vector2.up;
     private Vector3 SpriteRotate = new Vector3(0f, 0f, 0f);
     private Vector3 BodyOffset;
-    public float horizontal;
-    public float vertical;
+    private const float x = 0.05f;
 
     private void Awake()
     {
@@ -49,7 +47,7 @@ public class PlayerController : MonoBehaviour
         }
         if (!IsMoving)
         {
-            float x = 0.05f;
+            
             if (horizontal > 0 && direction != Vector3.left)
             {
                 direction = Vector3.right;
@@ -113,7 +111,5 @@ public class PlayerController : MonoBehaviour
         NewSegment.transform.SetParent(Segment.transform.parent, false);
         segments.Add(NewSegment);
     }
-
-
 
 }

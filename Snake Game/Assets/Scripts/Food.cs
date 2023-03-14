@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Food : MonoBehaviour
 {
-    public BoxCollider2D Boundry;
-    public GameObject Apple;
-    public GameObject Skull;
+    [SerializeField] private BoxCollider2D Boundry;
+    [SerializeField] private GameObject Apple;
+    [SerializeField] private GameObject Skull;
     public int snakeSize;
 
     private float timer;

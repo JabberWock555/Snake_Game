@@ -1,25 +1,25 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
-    public Player1 Player1;
-    public Player2 Player2;
-    public Text ScoreDisplay;
-    public Text TimeRecord;
-    public Text PowerStatus;
-    public Text GameStartTime;
-    public Text PlayerWinStatus;
-    public GameObject PauseScreen;
-    public GameObject GameOverScreen;
     public static int score1 = 0;
     public static int score2 = 0;
     public static int Power = 4;
-    public Slider VolumeSlider;
-    public Button Unmute;
+
+    [SerializeField]private Player1 Player1;
+    [SerializeField]private Player2 Player2;
+    [SerializeField]private Text ScoreDisplay;
+    [SerializeField]private Text TimeRecord;
+    [SerializeField]private Text PowerStatus;
+    [SerializeField]private Text GameStartTime;
+    [SerializeField]private Text PlayerWinStatus;
+    [SerializeField]private GameObject PauseScreen;
+    [SerializeField]private GameObject GameOverScreen;
+    [SerializeField]private Slider VolumeSlider;
+    [SerializeField]private Button Unmute;
+    
     private float time;
     private bool paused = true;
 
@@ -61,24 +61,13 @@ public class GameUIManager : MonoBehaviour
                     if (Player1.win)
                     {
                         PlayerWinStatus.text = "Player 1 Win !\n" +
-                                "\n Player 1 Score : " + score1 + "\n Player 2 score : " + score2;
+                                "Player 1 Score : " + score1 + "\n Player 2 score : " + score2;
                     }
                     else if (!Player1.win)
                     {
                         PlayerWinStatus.text = "Player 2 Win !\n" +
-                               "\n Player 1 Score : " + score1 + "\n Player 2 score : " + score2;
+                               "Player 1 Score : " + score1 + "\n Player 2 score : " + score2;
                     }
-                    //switch (Player1.win)
-                    //{
-                    //    case true:
-                    //        PlayerWinStatus.text = "Player 1 Win !\n" +
-                    //            "\n Player 1 Score : " + score1 + "\n Player 2 score : " + score2;
-                    //        break;
-                    //    case false:
-                    //        PlayerWinStatus.text = "Player 2 Win !\n" +
-                    //            "\n Player 1 Score : " + score1 + "\n Player 2 score : " + score2;
-                    //        break;
-                    //}
                     Debug.Log("Dead");
                     GameOverScreen.SetActive(true);
                     paused = true;

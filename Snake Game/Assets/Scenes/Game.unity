@@ -993,7 +993,6 @@ MonoBehaviour:
   vertical: 0
   Snake2: {fileID: 359942649}
   Is2Alive: 1
-  win: 0
 --- !u!61 &422088168
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1824,7 +1823,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &852540184
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3245,7 +3244,6 @@ MonoBehaviour:
   horizontal: 0
   vertical: 0
   Is1Alive: 1
-  win: 0
 --- !u!1 &1519028888
 GameObject:
   m_ObjectHideFlags: 0
@@ -3796,7 +3794,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.42400002, y: 0.8496324}
   m_AnchorMax: {x: 0.5744689, y: 0.9868736}
-  m_AnchoredPosition: {x: 0, y: -60.00006}
+  m_AnchoredPosition: {x: 0, y: -60.000076}
   m_SizeDelta: {x: 86.94, y: 191.98}
   m_Pivot: {x: 0.5, y: 0.5000001}
 --- !u!114 &1832685102

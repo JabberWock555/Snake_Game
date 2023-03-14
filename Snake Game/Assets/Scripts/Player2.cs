@@ -1,4 +1,3 @@
-
 using UnityEngine;
 public class Player2 : PlayerController
 {
@@ -23,21 +22,20 @@ public class Player2 : PlayerController
     {
         if (!ShieldUp)
         {
-            if (collision.tag == "Body2")
+            if (collision.CompareTag("Body2"))
             {
-                Debug.Log("Body Touch");
                 Is2Alive = false;
                 SoundManager.Instance.Play(SoundEvents.GameOver);
                 enabled = false;
             }
-            else if (collision.tag == "Body1")
+            else if (collision.CompareTag("Body1"))
             {
                 Is2Alive = true;
                 Player1.win = false;
                 SoundManager.Instance.Play(SoundEvents.GameOver);
                 enabled = false;
             }
-            else if (collision.tag == "Player1")
+            else if (collision.CompareTag("Player1"))
             {
                 if (GameUIManager.score2 > GameUIManager.score1)
                 {
@@ -54,14 +52,14 @@ public class Player2 : PlayerController
             }
         }
         //--------Food
-        if (collision.tag == "Apple")
+        if (collision.CompareTag("Apple"))
         {
             SoundManager.Instance.Play(SoundEvents.EatApple);
             GameUIManager.score2 += foodPoints;
             food.AppleEaten(segments.Count);
             Grow();
         }
-        else if (collision.tag == "Skull")
+        else if (collision.CompareTag("Skull"))
         {
             SoundManager.Instance.Play(SoundEvents.EatSkull);
             if (GameUIManager.score2 > 10)
@@ -78,9 +76,8 @@ public class Player2 : PlayerController
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.tag == "Wall")
+        if (collision.CompareTag("Wall"))
         {
-            Debug.Log("Wall Touch");
             SoundManager.Instance.Play(SoundEvents.GameOver);
             enabled = false;
             Is2Alive = false;

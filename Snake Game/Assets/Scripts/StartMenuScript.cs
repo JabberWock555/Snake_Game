@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public class StartMenuScript : MonoBehaviour
 {
-    public Button PlayButton;
-    public Button SinglePlayerButton;
-    public Button MultiPlayerButton;
+    [SerializeField] private Button PlayButton;
+    [SerializeField] private Button SinglePlayerButton;
+    [SerializeField] private Button MultiPlayerButton;
 
     private void Awake()
     {
